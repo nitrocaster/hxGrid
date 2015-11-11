@@ -1,0 +1,144 @@
+object Form1: TForm1
+  Left = 240
+  Top = 123
+  BorderStyle = bsDialog
+  Caption = 'Mandelbrot fractal explorer - Single CPU, Extended version'
+  ClientHeight = 229
+  ClientWidth = 645
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Image1: TImage
+    Left = 24
+    Top = 20
+    Width = 105
+    Height = 25
+    Picture.Data = {
+      07544269746D617036030000424D360300000000000036000000280000000001
+      000001000000010018000000000000030000120B0000120B0000000000000000
+      00001300FF0F00FF0B00FF0900FF0600FF0400FF0300FF0200FF0100FF0100FF
+      0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0000FF0001FF0003
+      FF0007FF000AFF000FFF0013FF0017FF001CFF0021FF0027FF002CFF0032FF00
+      39FF003FFF0045FF004BFF0052FF0058FF0060FF0066FF006EFF0074FF007BFF
+      0082FF0089FF0090FF0098FF009EFF00A5FF00ABFF00B1FF00B8FF00BEFF00C4
+      FF00CAFF00D0FF00D5FF00DBFF00DFFF00E5FF00E8FF00ECFF00F0FF00F4FF00
+      F7FF00F9FF00FBFF00FCFC01FCFA02FCF702FCF303FCEF03FCEB04FCE704FCE3
+      05FCDE05FCD906FCD407FCCE07FCC908FCC309FABD09F8B70AF7B20AF5AC0BF3
+      A50CF19F0DEE990EEC920FE98C0FE78510E48011E17912DF7214DC6B15DA6615
+      D75F17D45918D1531ACF4C1BCC471CCA411EC73B1FC63520C33022C12B24BF25
+      27BD2128BB1C2AB9182DB8132FB71031B60C33B50835B50538B5033AB4003DB4
+      0040B40042B50046B5004AB6004DB70051B80054B90058BA005DBB0061BD0065
+      BF006AC0006EC20073C40078C6007CC70081CA0086CC008BCD0090CF0095D200
+      9AD3009FD600A3D800A9DA00B1DD00B8E000BFE300C6E500CCE800D2E900D9EA
+      00DEEA00E4EA00E9EA00EEEA00F2EA00F5EA00F8EA00FBEA00FDEA00FFEA00FF
+      E700FFE300FFDD00FFD800FDD200FACC00F7C400F4BC00F0B400ECAB00E7A300
+      E29900DD9000D78700D27D00CF7600CB7100C86C00C56700C26100BF5C00BC58
+      00B95200B64D00B34700B14300AE3F00AB3900A93500A53100A42C00A128009E
+      24009C20009A1C00991800971500961200940F00930B00920900900700910400
+      90020190000590000890000C90001190001590001A91001E91002492002A9300
+      2F94003594003B96004297004899004F9A00559B005C9D00639F006AA10071A2
+      0078A4007FA60089A90093AC009EAF00A8B100B2B400BCB700C6BA00CEBC00D7
+      BE00DFC000E6C200EEC300F4C500F9C600FEC600FFC600FEC600FEC600FEC600
+      FEC600FFC600FFC600FFC600FFC600FFC600FFC600FFC600FFC600FFC600FFC6
+      00FF}
+    Visible = False
+  end
+  object Image2: TImage
+    Left = 4
+    Top = 4
+    Width = 202
+    Height = 202
+    OnMouseDown = Image2MouseDown
+  end
+  object Label1: TLabel
+    Left = 280
+    Top = 12
+    Width = 10
+    Height = 13
+    Caption = 'X:'
+  end
+  object Label2: TLabel
+    Left = 280
+    Top = 44
+    Width = 10
+    Height = 13
+    Caption = 'Y:'
+  end
+  object Label3: TLabel
+    Left = 260
+    Top = 76
+    Width = 30
+    Height = 13
+    Caption = 'Zoom:'
+  end
+  object Label4: TLabel
+    Left = 224
+    Top = 108
+    Width = 68
+    Height = 13
+    Caption = 'Max iterations:'
+  end
+  object Label5: TLabel
+    Left = 32
+    Top = 212
+    Width = 141
+    Height = 13
+    Caption = 'Left-Click in picture to zoom in'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlue
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Button2: TButton
+    Left = 560
+    Top = 132
+    Width = 75
+    Height = 25
+    Caption = 'Render'
+    Default = True
+    TabOrder = 0
+    OnClick = Button2Click
+  end
+  object Edit1: TEdit
+    Left = 296
+    Top = 8
+    Width = 345
+    Height = 21
+    TabOrder = 1
+    Text = '0'
+  end
+  object Edit2: TEdit
+    Left = 296
+    Top = 40
+    Width = 345
+    Height = 21
+    TabOrder = 2
+    Text = '0'
+  end
+  object Edit3: TEdit
+    Left = 296
+    Top = 72
+    Width = 345
+    Height = 21
+    TabOrder = 3
+    Text = '0.25'
+  end
+  object Edit4: TEdit
+    Left = 296
+    Top = 104
+    Width = 345
+    Height = 21
+    TabOrder = 4
+    Text = '3000'
+  end
+end

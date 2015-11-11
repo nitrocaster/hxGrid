@@ -1,0 +1,14 @@
+=====================================
+hxGrid
+Copyright (C) 2007-2008 by Roman Lut
+=====================================
+
+I would like to thank the following people for help and support:
+
+ Santiago Orgaz <granthill76@yahoo.com>, author of xNormal (www.xnormal.net),
+ for bugreports and hxgrid intergation into xNormal. His feedback has 
+ made hxGrid much better.
+
+ Tombre <tombre@deep-shadows.com> for testing and models. 
+
+ Slipchenko Konstantin <slipch@gsc-game.kiev.ua> for bugreport.

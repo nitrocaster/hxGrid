@@ -1,0 +1,62 @@
+There is a bug in TServerSocket component, Delphi 6 - BDS 2006 have it.
+
+When TServerWinSocket.Disconnect() is called:
+
+      while FActiveThreads.Count > 0 do
+        with TServerClientThread(FActiveThreads.Last) do
+        begin
+          FreeOnTerminate := False;
+          Terminate;
+          FEvent.SetEvent; //resume TServerSocketThread, sorfe it to terminate
+          if (ClientSocket <> nil) and ClientSocket.Connected then
+            ClientSocket.Close; //close socket (1)
+          WaitFor;
+          Free;
+        end;
+
+At the same time, TServerSocketThread calls:
+
+  FClientSocket.Free;   // (2)
+  FClientSocket := nil;
+
+Since
+  FClientSocket.Free;
+  FClientSocket := nil;
+
+is not atomic, there can be Access Violation in (1) - 
+accessing destroyed CS inside TCustomWinsocket.Disconnect.Lock().
+
+Solution: use criticacl section in (1) and (2).
+Fixed in hxScktComp.pas.
+
+-->source\vcl\scktcomp.pas
+procedure TServerWinSocket.Disconnect(Socket: TSocket);
+var
+  SaveCacheSize: Integer;
+begin
+  Lock;
+  try
+    SaveCacheSize := ThreadCacheSize;
+    try
+      ThreadCacheSize := 0;
+      while FActiveThreads.Count > 0 do
+        with TServerClientThread(FActiveThreads.Last) do
+        begin
+          FreeOnTerminate := False;
+          Terminate;
+          FEvent.SetEvent;
+          if (ClientSocket <> nil) and ClientSocket.Connected then
+            ClientSocket.Close; //(1)
+          WaitFor;
+          Free;
+        end;
+
+-->source\vcl\scktcomp.pas
+function TServerClientThread.EndConnect: Boolean;
+begin
+  FClientSocket.Free;      //(2)
+  FClientSocket := nil;
+  Result := Terminated or not KeepInCache;
+end;
+
+
